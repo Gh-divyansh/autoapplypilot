@@ -107,4 +107,4 @@ npm run build
 ---
 
 ## 📜 License
-MIT License. Created by Divyansh Sharma.
+MIT License. Created by Divyanshu Tailor.
