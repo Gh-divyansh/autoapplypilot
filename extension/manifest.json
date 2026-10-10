@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "AutoApplyPilot Companion",
+  "version": "1.0.0",
+  "description": "1-Click Autopilot & Smart Form Filler for LinkedIn Easy Apply, Indeed, and Naukri.com.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.linkedin.com/*",
+    "*://*.indeed.com/*",
+    "*://*.naukri.com/*",
+    "*://*.instahyre.com/*",
+    "*://*.wellfound.com/*",
+    "*://*.greenhouse.io/*",
+    "*://*.lever.co/*",
+    "http://localhost:3000/*"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*",
+        "*://*.indeed.com/*",
+        "*://*.naukri.com/*",
+        "*://*.instahyre.com/*",
+        "*://*.wellfound.com/*",
+        "*://*.greenhouse.io/*",
+        "*://*.lever.co/*"
+      ],
+      "js": ["content/scanners.js", "content/autofill.js"],
+      "css": ["content/pill.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

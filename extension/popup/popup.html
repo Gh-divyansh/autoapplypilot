@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoApplyPilot Companion</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Brand Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+        <div class="brand-info">
+          <h1>AutoApplyPilot</h1>
+          <span class="badge">Companion v1.0</span>
+        </div>
+      </div>
+      <div id="statusIndicator" class="status-indicator offline">
+        <span class="status-dot"></span>
+        <span id="statusText">Connecting...</span>
+      </div>
+    </header>
+
+    <!-- Candidate Card -->
+    <section class="card candidate-card">
+      <div class="card-header">
+        <span class="card-label">ACTIVE CANDIDATE PROFILE</span>
+        <span id="syncBadge" class="sync-badge">Auto-Synced</span>
+      </div>
+      <div class="candidate-details">
+        <h2 id="candidateName">Divyansh Sharma</h2>
+        <p id="candidateTarget">Targeting: India • Full Stack & Backend</p>
+      </div>
+      <div class="info-chips">
+        <span id="chipLocation" class="chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Jaipur, India
+        </span>
+        <span id="chipCurrency" class="chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+          INR (LPA)
+        </span>
+        <span id="chipNotice" class="chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          15 Days
+        </span>
+      </div>
+    </section>
+
+    <!-- Live Job Ingestion Card -->
+    <section class="card ingest-card" id="ingestSection">
+      <div class="card-header">
+        <span class="card-label">LIVE PAGE INGESTION</span>
+        <span id="platformBadge" class="sync-badge" style="background:#0f172a; color:#38bdf8;">Scanning Tab...</span>
+      </div>
+      <div class="ingest-details" style="margin-top:6px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:#1e293b;" id="visibleJobsText">Scanning active page...</span>
+          <span style="font-size:11px; color:#64748b;" id="activePlatformName">LinkedIn / Naukri / Indeed</span>
+        </div>
+        <button id="btnIngestPage" class="btn btn-primary full-width" style="background:#059669; justify-content:center;" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:middle; margin-right:6px;"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M21 21v-5h-5"/></svg>
+          <span id="btnIngestText">Sync Visible Jobs to Portal</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Autopilot Controls -->
+    <section class="card controls-card">
+      <div class="toggle-row">
+        <div>
+          <span class="toggle-title">Autopilot 1-Click Fill</span>
+          <p class="toggle-subtitle">Injects floating apply widget on LinkedIn, Indeed & Naukri</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="autopilotToggle" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Queue Summary -->
+    <section class="card queue-card">
+      <div class="queue-stat">
+        <div>
+          <span class="queue-count" id="queueCount">0</span>
+          <span class="queue-label">High-Match Queued Roles</span>
+        </div>
+        <button id="btnSync" class="btn btn-secondary">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+          <span>Sync</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer Actions -->
+    <footer class="footer">
+      <button id="btnOpenDashboard" class="btn btn-primary full-width">
+        <span>Open AutoApplyPilot Dashboard →</span>
+      </button>
+      <div class="footer-note">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>100% Platform ToS Compliant • Runs In-Browser</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
